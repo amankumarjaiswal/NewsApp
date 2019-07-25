@@ -2,6 +2,7 @@ package com.amankj.news.usecase;
 
 import android.util.Log;
 import com.amankj.news.data.INewsDataSource;
+import io.reactivex.Single;
 
 public class TopHeadlinesUseCase {
     private static final String TAG = TopHeadlinesUseCase.class.getSimpleName();
@@ -12,9 +13,9 @@ public class TopHeadlinesUseCase {
         this.newsDataSource = newsDataSource;
     }
 
-    public void getTopHeadlines() {
+    public Single<Object> getTopHeadlines() {
         Log.d(TAG, "getTopHeadlines");
 
-        newsDataSource.getTopHeadlinesRemote();
+        return newsDataSource.getTopHeadlinesRemote();
     }
 }

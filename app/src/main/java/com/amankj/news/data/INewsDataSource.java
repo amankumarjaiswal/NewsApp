@@ -1,6 +1,8 @@
 package com.amankj.news.data;
 
+import io.reactivex.Single;
+
 public interface INewsDataSource {
 
-    void getTopHeadlinesRemote();
+    Single<Object> getTopHeadlinesRemote();
 }
