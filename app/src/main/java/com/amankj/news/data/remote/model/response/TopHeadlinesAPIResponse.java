@@ -1,6 +1,6 @@
 package com.amankj.news.data.remote.model.response;
 
-import com.amankj.news.model.Article;
+import com.amankj.news.common.Article;
 
 import java.util.List;
 

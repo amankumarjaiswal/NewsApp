@@ -1,4 +1,4 @@
-package com.amankj.news.model;
+package com.amankj.news.common;
 
 public class Article {
 
