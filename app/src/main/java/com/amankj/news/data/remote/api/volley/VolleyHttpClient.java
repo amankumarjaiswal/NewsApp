@@ -7,7 +7,6 @@ import com.amankj.news.data.remote.api.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 public class VolleyHttpClient implements IHttpClient {
@@ -26,8 +25,9 @@ public class VolleyHttpClient implements IHttpClient {
 
         requestCallback = request.getRequestCallback();
 
-        StringRequest stringRequest = new StringRequest(request.getMethod(), request.getUrl(), responseListener, errorListener);
-        requestQueue.add(stringRequest);
+        VolleyRequest volleyRequest = new VolleyRequest(request.getMethod(), request.getUrl(), responseListener, errorListener);
+
+        requestQueue.add(volleyRequest);
 
         return true;
     }
