@@ -20,7 +20,6 @@ public class NewsListViewActivity extends AppCompatActivity {
     private NewsListAdapter newsListAdapter;
 
     private NewsListViewActivity newsListViewActivity;
-
     private RecyclerView newsListView;
 
     @Override
@@ -41,8 +40,8 @@ public class NewsListViewActivity extends AppCompatActivity {
     private void getTopHeadlines() {
         Log.d(TAG, "getTopHeadlines");
 
-        TopHeadlinesViewModel topHeadlinesViewModel = ViewModelProvider.getTopHeadlinesViewModel(this);
-        topHeadlinesViewModel.getTopHeadlines(this);
+        TopHeadlinesViewModel topHeadlinesViewModel = ViewModelProvider.getTopHeadlinesViewModel(newsListViewActivity);
+        topHeadlinesViewModel.getTopHeadlines(newsListViewActivity);
         topHeadlinesViewModel.getArticleListObservable().observe(this, new Observer<Object>() {
             @Override
             public void onChanged(Object object) {

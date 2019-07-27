@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:padding="10dp"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+<com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-            android:id="@+id/news_list_item_text"
+    <LinearLayout
+            android:id="@+id/news_item_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/darker_gray"
-            android:textSize="25sp"
-            android:text="Loading..."/>
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:orientation="vertical">
 
-</LinearLayout>
+        <ImageView
+                android:id="@+id/news_list_item_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:id="@+id/news_list_item_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                style="@style/TextStyle1"
+                android:text="Loading..."/>
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
