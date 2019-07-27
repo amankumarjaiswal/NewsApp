@@ -52,12 +52,9 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsIt
                 .load(article.getUrlToImage())
                 .into(holder.newsListItemImage);
 
-        holder.newsItemLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick");
-                startNewsWebActivity(article.getUrl());
-            }
+        holder.newsItemLayout.setOnClickListener(v -> {
+            Log.d(TAG, "onClick");
+            startNewsWebActivity(article.getUrl());
         });
     }
 

@@ -7,7 +7,6 @@ import com.amankj.news.UseCaseProvider;
 import com.amankj.news.usecase.TopHeadlinesUseCase;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class TopHeadlinesViewModel extends ViewModel {
@@ -32,18 +31,12 @@ public class TopHeadlinesViewModel extends ViewModel {
         Disposable disposable = topHeadlinesUseCase.getTopHeadlines()
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.computation())
-                .subscribe(new Consumer<Object>() {
-                    @Override
-                    public void accept(Object o) throws Exception {
-                        Log.d(TAG, "accept Object");
-                        articleListObservable.postValue(o);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Log.d(TAG, "accept Throwable");
-                        //articleListObservable.postValue();
-                    }
+                .subscribe(o -> {
+                    Log.d(TAG, "accept Object");
+                    articleListObservable.postValue(o);
+                }, throwable -> {
+                    Log.d(TAG, "accept Throwable");
+                    //articleListObservable.postValue();
                 });
 
         compositeDisposable.add(disposable);

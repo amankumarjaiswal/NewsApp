@@ -3,7 +3,6 @@ package com.amankj.news.view;
 import android.os.Bundle;
 import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.amankj.news.R;
@@ -42,17 +41,14 @@ public class NewsListViewActivity extends AppCompatActivity {
 
         TopHeadlinesViewModel topHeadlinesViewModel = ViewModelProvider.getTopHeadlinesViewModel(newsListViewActivity);
         topHeadlinesViewModel.getTopHeadlines();
-        topHeadlinesViewModel.getArticleListObservable().observe(this, new Observer<Object>() {
-            @Override
-            public void onChanged(Object object) {
-                Log.d(TAG, "onChanged");
+        topHeadlinesViewModel.getArticleListObservable().observe(this, object -> {
+            Log.d(TAG, "onChanged");
 
-                articleArrayList = (ArrayList<Article>) object;
-                newsListAdapter = new NewsListAdapter(newsListViewActivity, articleArrayList);
-                newsListView.setAdapter(newsListAdapter);
-                Log.d(TAG, "size: " + articleArrayList.size());
-                newsListAdapter.notifyDataSetChanged();
-            }
+            articleArrayList = (ArrayList<Article>) object;
+            newsListAdapter = new NewsListAdapter(newsListViewActivity, articleArrayList);
+            newsListView.setAdapter(newsListAdapter);
+            Log.d(TAG, "size: " + articleArrayList.size());
+            newsListAdapter.notifyDataSetChanged();
         });
     }
 }

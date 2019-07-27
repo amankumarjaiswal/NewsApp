@@ -9,8 +9,6 @@ import com.amankj.news.data.remote.util.NetworkUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import io.reactivex.Single;
-import io.reactivex.SingleEmitter;
-import io.reactivex.SingleOnSubscribe;
 
 public class TopHeadlinesRemoteSource implements ITopHeadlinesRemoteSource {
     private static final String TAG = TopHeadlinesRemoteSource.class.getSimpleName();
@@ -38,32 +36,29 @@ public class TopHeadlinesRemoteSource implements ITopHeadlinesRemoteSource {
         final String url = uriBuilder.build().toString();
         Log.i(TAG, "url : " + url);
 
-        return Single.create(new SingleOnSubscribe<Object>() {
-            @Override
-            public void subscribe(final SingleEmitter<Object> emitter) throws Exception {
-                Request request = new Request(url, Request.Method.GET, new Request.RequestCallback() {
-                    @Override
-                    public void onSuccess(Object object) {
-                        Log.d(TAG, "onSuccess");
+        return Single.create(emitter -> {
+            Request request = new Request(url, Request.Method.GET, new Request.RequestCallback() {
+                @Override
+                public void onSuccess(Object object) {
+                    Log.d(TAG, "onSuccess");
 
-                        TopHeadlinesAPIResponse topHeadlinesAPIResponse = parseResponse(object);
-                        if (topHeadlinesAPIResponse == null) {
-                            emitter.onError(new Throwable("Response is null"));
-                        } else if ("error".equals(topHeadlinesAPIResponse.getStatus())) {
-                            emitter.onError(new Throwable("Error Response"));
-                        } else {
-                            emitter.onSuccess(topHeadlinesAPIResponse.getArticles());
-                        }
+                    TopHeadlinesAPIResponse topHeadlinesAPIResponse = parseResponse(object);
+                    if (topHeadlinesAPIResponse == null) {
+                        emitter.onError(new Throwable("Response is null"));
+                    } else if ("error".equals(topHeadlinesAPIResponse.getStatus())) {
+                        emitter.onError(new Throwable("Error Response"));
+                    } else {
+                        emitter.onSuccess(topHeadlinesAPIResponse.getArticles());
                     }
+                }
 
-                    @Override
-                    public void onError() {
-                        Log.e(TAG, "onError");
-                        emitter.onError(new Throwable());
-                    }
-                });
-                httpClient.issueRequest(request);
-            }
+                @Override
+                public void onError() {
+                    Log.e(TAG, "onError");
+                    emitter.onError(new Throwable());
+                }
+            });
+            httpClient.issueRequest(request);
         });
     }
 
