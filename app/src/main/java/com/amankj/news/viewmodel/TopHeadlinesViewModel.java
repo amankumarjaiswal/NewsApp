@@ -1,6 +1,5 @@
 package com.amankj.news.viewmodel;
 
-import android.content.Context;
 import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -27,8 +26,8 @@ public class TopHeadlinesViewModel extends ViewModel {
         return articleListObservable;
     }
 
-    public void getTopHeadlines(Context context) {
-        topHeadlinesUseCase = UseCaseProvider.getTopHeadlinesUseCase(context);
+    public void getTopHeadlines() {
+        topHeadlinesUseCase = UseCaseProvider.getTopHeadlinesUseCase();
 
         Disposable disposable = topHeadlinesUseCase.getTopHeadlines()
                 .subscribeOn(Schedulers.io())

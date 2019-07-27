@@ -1,7 +1,7 @@
 package com.amankj.news.data.remote.api.volley;
 
-import android.content.Context;
 import android.util.Log;
+import com.amankj.news.MyApplication;
 import com.amankj.news.data.remote.api.IHttpClient;
 import com.amankj.news.data.remote.api.Request;
 import com.android.volley.RequestQueue;
@@ -15,8 +15,8 @@ public class VolleyHttpClient implements IHttpClient {
     private RequestQueue requestQueue;
     private Request.RequestCallback requestCallback;
 
-    public VolleyHttpClient(Context context) {
-        requestQueue = Volley.newRequestQueue(context);
+    public VolleyHttpClient() {
+        requestQueue = Volley.newRequestQueue(MyApplication.getAppContext());
     }
 
     @Override

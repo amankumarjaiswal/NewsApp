@@ -1,6 +1,8 @@
 package com.amankj.news.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,7 +31,12 @@ public class NewsWebViewActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String url = intent.getStringExtra("url");
-        if (url == null) {
+        if (!isNetworkConnected()) {
+            Log.d(TAG, "network not connnected");
+            webView.setVisibility(View.GONE);
+            brokenText.setVisibility(View.VISIBLE);
+            brokenText.setText("You are offline!");
+        } else if (url == null) {
             Log.d(TAG, "url is null");
             webView.setVisibility(View.GONE);
             brokenText.setText(View.VISIBLE);
@@ -40,5 +47,13 @@ public class NewsWebViewActivity extends AppCompatActivity {
             webView.getSettings().setJavaScriptEnabled(true);
             webView.loadUrl(url);
         }
+    }
+
+    private boolean isNetworkConnected() {
+        Log.d(TAG, "isNetworkConnected");
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
     }
 }

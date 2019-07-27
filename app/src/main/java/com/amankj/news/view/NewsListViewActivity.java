@@ -41,7 +41,7 @@ public class NewsListViewActivity extends AppCompatActivity {
         Log.d(TAG, "getTopHeadlines");
 
         TopHeadlinesViewModel topHeadlinesViewModel = ViewModelProvider.getTopHeadlinesViewModel(newsListViewActivity);
-        topHeadlinesViewModel.getTopHeadlines(newsListViewActivity);
+        topHeadlinesViewModel.getTopHeadlines();
         topHeadlinesViewModel.getArticleListObservable().observe(this, new Observer<Object>() {
             @Override
             public void onChanged(Object object) {
