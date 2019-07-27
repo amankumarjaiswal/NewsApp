@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.amankj.news.R;
 import com.amankj.news.common.Article;
+import com.amankj.news.common.DateUtil;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -44,6 +45,9 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsIt
         final Article article = articleList.get(position);
 
         holder.newsListItemText.setText(article.getTitle().trim());
+        String publishTime = DateUtil.formatUTCDateToLocal(article.getPublishedAt().trim(),
+                DateUtil.YYYY_MM_DD_T_HH_MM_SS_Z, DateUtil.MMM_DD_YYYY_HH_MM_A);
+        holder.publishTimeText.setText(publishTime);
         Glide.with(context)
                 .load(article.getUrlToImage())
                 .into(holder.newsListItemImage);
@@ -68,6 +72,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsIt
         LinearLayout newsItemLayout;
         TextView newsListItemText;
         ImageView newsListItemImage;
+        TextView publishTimeText;
 
         NewsItemHolder(@NonNull View itemView) {
             super(itemView);
@@ -75,6 +80,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsIt
             newsItemLayout = itemView.findViewById(R.id.news_item_layout);
             newsListItemText = itemView.findViewById(R.id.news_list_item_text);
             newsListItemImage = itemView.findViewById(R.id.news_list_item_image);
+            publishTimeText = itemView.findViewById(R.id.publish_time_text);
         }
     }
 

@@ -27,6 +27,16 @@
                 android:padding="5dp"
                 style="@style/TextStyle1"
                 android:text="Loading..."/>
+
+        <TextView
+                android:id="@+id/publish_time_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:padding="5dp"
+                style="@style/TextStyle2"
+                android:text="27 July 2019"/>
+
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

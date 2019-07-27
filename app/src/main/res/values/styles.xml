@@ -10,8 +10,16 @@
 
     <style name="TextStyle1" parent="TextAppearance.MaterialComponents.Subtitle1">
         <item name="android:letterSpacing">0</item>
-        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">sans-serif-condensed-medium</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextStyle2" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:letterSpacing">0</item>
+        <item name="android:fontFamily">sans-serif-condensed-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">15sp</item>
     </style>
 
 </resources>
