@@ -2,7 +2,7 @@ package com.amankj.news.data;
 
 import android.util.Log;
 import com.amankj.news.data.remote.ITopHeadlinesRemoteSource;
-import io.reactivex.Single;
+import io.reactivex.Flowable;
 
 public class NewDataSource implements INewsDataSource {
     private static final String TAG = NewDataSource.class.getSimpleName();
@@ -14,7 +14,7 @@ public class NewDataSource implements INewsDataSource {
     }
 
     @Override
-    public Single<Object> getTopHeadlinesRemote() {
+    public Flowable<Object> getTopHeadlinesRemote() {
         Log.d(TAG, "getTopHeadlinesRemote");
 
         return topHeadlinesRemoteSource.getTopHeadlines();

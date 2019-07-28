@@ -8,7 +8,8 @@ import com.amankj.news.data.remote.model.response.TopHeadlinesAPIResponse;
 import com.amankj.news.data.remote.util.NetworkUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
-import io.reactivex.Single;
+import io.reactivex.BackpressureStrategy;
+import io.reactivex.Flowable;
 
 public class TopHeadlinesRemoteSource implements ITopHeadlinesRemoteSource {
     private static final String TAG = TopHeadlinesRemoteSource.class.getSimpleName();
@@ -24,7 +25,7 @@ public class TopHeadlinesRemoteSource implements ITopHeadlinesRemoteSource {
     }
 
     @Override
-    public Single<Object> getTopHeadlines() {
+    public Flowable<Object> getTopHeadlines() {
         Log.d(TAG, "getTopHeadlines");
 
         String apiKey = NetworkUtil.getNewsApiKey();
@@ -36,7 +37,7 @@ public class TopHeadlinesRemoteSource implements ITopHeadlinesRemoteSource {
         final String url = uriBuilder.build().toString();
         Log.i(TAG, "url : " + url);
 
-        return Single.create(emitter -> {
+        return Flowable.create(emitter -> {
             Request request = new Request(url, Request.Method.GET, new Request.RequestCallback() {
                 @Override
                 public void onSuccess(Object object) {
@@ -48,7 +49,7 @@ public class TopHeadlinesRemoteSource implements ITopHeadlinesRemoteSource {
                     } else if ("error".equals(topHeadlinesAPIResponse.getStatus())) {
                         emitter.onError(new Throwable("Error Response"));
                     } else {
-                        emitter.onSuccess(topHeadlinesAPIResponse.getArticles());
+                        emitter.onNext(topHeadlinesAPIResponse.getArticles());
                     }
                 }
 
@@ -59,7 +60,7 @@ public class TopHeadlinesRemoteSource implements ITopHeadlinesRemoteSource {
                 }
             });
             httpClient.issueRequest(request);
-        });
+        }, BackpressureStrategy.LATEST);
     }
 
     private TopHeadlinesAPIResponse parseResponse(Object response) {

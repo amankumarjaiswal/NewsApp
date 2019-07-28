@@ -1,8 +1,8 @@
 package com.amankj.news.data.remote;
 
-import io.reactivex.Single;
+import io.reactivex.Flowable;
 
 public interface ITopHeadlinesRemoteSource {
 
-    Single<Object> getTopHeadlines();
+    Flowable<Object> getTopHeadlines();
 }
