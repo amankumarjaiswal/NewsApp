@@ -9,9 +9,6 @@ public class TopHeadlinesAPIResponse {
     private int totalResults;
     private List<Article> articles;
 
-    private TopHeadlinesAPIResponse() {
-    }
-
     public String getStatus() {
         return status;
     }

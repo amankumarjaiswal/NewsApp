@@ -75,7 +75,7 @@ public class Article {
         this.content = content;
     }
 
-    private class Source {
+    public class Source {
         private String id;
         private String name;
 

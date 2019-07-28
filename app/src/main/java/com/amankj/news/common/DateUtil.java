@@ -24,6 +24,7 @@ public class DateUtil {
             date = pf.parse(dateStr);
         } catch (ParseException e) {
             Log.e(TAG, e.getMessage());
+            return null;
         }
         pf.setTimeZone(TimeZone.getDefault());
 

@@ -2,7 +2,7 @@ package com.amankj.news;
 
 import android.util.Log;
 import com.amankj.news.data.INewsDataSource;
-import com.amankj.news.data.NewDataSource;
+import com.amankj.news.data.NewsDataSource;
 import com.amankj.news.data.remote.TopHeadlinesRemoteSource;
 import com.amankj.news.data.remote.api.volley.VolleyHttpClient;
 
@@ -12,6 +12,6 @@ public class DataSourceProvider {
     public static INewsDataSource getNewsDataSource() {
         Log.d(TAG, "getNewsDataSource");
 
-        return new NewDataSource(new TopHeadlinesRemoteSource(new VolleyHttpClient()));
+        return new NewsDataSource(new TopHeadlinesRemoteSource(new VolleyHttpClient()));
     }
 }
